@@ -7,9 +7,20 @@ describe('Fonction de recherche', () => {
 
     it('Recherche praticien', () => {
         
-        cy.get('[placeholder="Spécialité, praticien, établissement"]').type('test QATECHNIQUE{enter}', {force: true, delay: 50})
+        cy.get('[placeholder="Spécialité, praticien, établissement"]').type('test QATECHNIQUE{enter}', {force: true, delay: 50}) //Utilisation de "force" sinon KO
         cy.get('.access__content--address > h4').should('contain','Cabinet qatechnique')
-        cy.get('.spe').should('contain','généraliste')    
+        cy.get('.spe').should('contain','généraliste')   //Check généraliste 
+    })
+
+    //selection du motif avec test de visibilité du tableau
+    it('Selection Motif consultation', () => {
+        cy.get('.rdv__availability').should('not.be.visible')
+        cy.get('#consultationReasonName').select('Ablation de fils')
+        cy.get('.rdv__availability').should('be.visible')
+    })
+
+    it('Selection heure du RDV', () => {
+        cy.contains('08:00').click() //Selectionne le premier créneau de 8h00 dispo
     })
 
 

@@ -10,7 +10,7 @@ git clone https://github.com/akira783/Maiia-Test-QA.git
 cd Maiia-Test-QA
 
 # # installez les node_modules
-npm install
+npm install package-lock.json
 
 # # démarrer Cypress
 Depuis la racine du repertoire du projet exécutez: 

@@ -1,5 +1,9 @@
 describe('Registration Maiia', () => {
-    
+
+    var phone = "0658868551"
+    var Email = "testmaiia@yopmail.com"
+    var password = "Azeqsdwxc123!"
+
     it('Allez sur Staging.Maiia.com', () => {
         cy.visit("https://www.staging.maiia.com/")
         cy.title().should('eq','Maiia - RDV en ligne et Téléconsultation - Professionnels de santé')
@@ -56,5 +60,19 @@ describe('Registration Maiia', () => {
         cy.get('[class="MuiSvgIcon-root"]').click()
         cy.get('[name="password"]').should('have.attr','type','text')
       })
+        //Check formulaire valide avec Login déjà enregistré 
+    it('Compléter le formulaire', () => {
+        cy.get('form').within(() => {
+          cy.get('[name="phone"]').clear().type(phone) // Only yield inputs within form
+          cy.get('[name="username"]').clear().type(Email)
+          cy.get('[name="confirmUsername"]').clear().type(Email)
+          cy.get('[name="password"]').clear().type(password)
+          cy.get('[name="check"]').click()
+          cy.get('[type="submit"]').click()
+        })     
+      })
 
+    it('Check compte déjà créé'), () => {
+        cy.contains('sont déjà utilisés').should('exist')
+    }
 })
